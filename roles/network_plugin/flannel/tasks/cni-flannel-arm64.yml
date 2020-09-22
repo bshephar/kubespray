@@ -1,0 +1,8 @@
+- name: Flannel | Create Flannel manifests
+  template:
+    src: "{{ item.file }}.j2"
+    dest: "{{ kube_config_dir }}/{{ item.file }}"
+  with_items:
+    - {name: kube-flannel-arm64, file: cni-flannel-arm64.yml, type: ds}
+  register: flannel_node_manifests
+  delegate_to: "{{ groups['kube-master'][0] }}"

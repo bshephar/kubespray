@@ -9,3 +9,9 @@
   register: flannel_node_manifests
   when:
     - inventory_hostname == groups['kube-master'][0]
+
+- name: Flannel | Create Flannel manifests for arm64 nodes
+  include: cni-flannel-arm64.yml
+  when:
+    - ansible_architecture == "aarch64"
+
